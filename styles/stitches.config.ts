@@ -6,7 +6,7 @@ const StitchesConfig = createStitches({
     colors: {},
 
     fonts: {
-      primary: '', // set your font
+      primary: 'Inter', // set your font
     },
 
     fontSizes: {

@@ -7,7 +7,7 @@ export const globalStyles = globalCss(...normalize, {
     fontStyle: 'normal',
     fontWeight: '100 900',
     fontDisplay: 'optional',
-    src: 'url("/fonts/") format("woff2")',
+    src: 'url("/fonts/inter-var-latin.woff2") format("woff2")',
   },
 
   html: {
