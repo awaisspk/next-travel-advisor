@@ -1,5 +1,5 @@
 import type * as Stitches from '@stitches/react';
-import {config} from '@stitches';
+import {config} from '@nextui-org/react';
 
 type TCSS = Stitches.CSS<typeof config>;
 

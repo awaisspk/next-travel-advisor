@@ -1,4 +1,4 @@
-import {styled} from '@stitches';
+import {styled} from '@nextui-org/react';
 import {gap} from './gap';
 
 export const Flex = styled('div', {
