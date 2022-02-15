@@ -1,26 +1,19 @@
-import {getCssText} from '@stitches';
 import Document, {Html, Head, Main, NextScript} from 'next/document';
+import {CssBaseline} from '@nextui-org/react';
 
 class MyDocument extends Document {
+  static async getInitialProps(ctx: any) {
+    const initialProps = await Document.getInitialProps(ctx);
+    return {
+      ...initialProps,
+      styles: <>{initialProps.styles}</>,
+    };
+  }
+
   render() {
     return (
       <Html lang="en">
-        <Head>
-          <link
-            rel="preload"
-            href="/fonts/inter-var-latin.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <meta charSet="utf-8" />
-
-          <style
-            id="stitches"
-            dangerouslySetInnerHTML={{__html: getCssText()}}
-          />
-        </Head>
-
+        <Head>{CssBaseline.flush()}</Head>
         <body>
           <Main />
           <NextScript />
