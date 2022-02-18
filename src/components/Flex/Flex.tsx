@@ -15,7 +15,7 @@ export const Flex = styled('div', {
         flexWrap: 'wrap-reverse',
       },
     },
-    flow: {
+    direction: {
       row: {
         flexDirection: 'row',
       },
@@ -29,7 +29,7 @@ export const Flex = styled('div', {
         flexDirection: 'column-reverse',
       },
     },
-    main: {
+    justify: {
       start: {
         justifyContent: 'flex-start',
       },
@@ -53,7 +53,7 @@ export const Flex = styled('div', {
       },
     },
 
-    cross: {
+    alignItems: {
       start: {
         alignItems: 'flex-start',
       },
@@ -69,15 +69,6 @@ export const Flex = styled('div', {
     },
 
     gap,
-
-    display: {
-      flex: {
-        display: 'flex',
-      },
-      inline: {
-        display: 'inline-flex',
-      },
-    },
 
     center: {
       true: {
