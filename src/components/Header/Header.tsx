@@ -1,7 +1,7 @@
 import {MenuIcon} from '@components/icons/menu';
 import {SearchIcon} from '@components/icons/search';
 import {ThemeSwitch} from '@components/ThemeSwitch';
-import {Button, Grid, Input, styled, css} from '@nextui-org/react';
+import {Button, Grid, Input, styled, css, Text} from '@nextui-org/react';
 import {Coords} from 'google-map-react';
 import {Dispatch, SetStateAction, useState} from 'react';
 import {Autocomplete} from '@react-google-maps/api';
@@ -10,7 +10,7 @@ import {Box} from '@components/Box';
 const StyledHeader = styled('header', {
   position: 'sticky',
   top: '0%',
-  width: 'min(1200px, 100%)',
+  width: 'min(1300px, 100%)',
   margin: 'auto',
   h: '70px',
   display: 'flex',
@@ -53,7 +53,7 @@ export const Header = ({
 
   return (
     <StyledHeader>
-      {isMobile && (
+      {isMobile ? (
         <Button
           auto
           icon={<MenuIcon />}
@@ -62,6 +62,18 @@ export const Header = ({
           onClick={() => hideDetails((state) => !state)}
           css={{padding: '$1'}}
         />
+      ) : (
+        <Text
+          h2
+          size="1.5rem"
+          css={{
+            textGradient: '45deg, $purple500 -20%, $pink500 100%',
+            userSelect: 'none',
+            width: '180px',
+          }}
+        >
+          Travel advisor
+        </Text>
       )}
       <Grid.Container alignItems="center" justify="center" css={{h: '100%'}}>
         <Box css={{width: 'min(600px,100%)', position: 'relative'}}>
