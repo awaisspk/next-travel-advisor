@@ -1,8 +1,11 @@
-import {Flex} from '@components/Flex';
+import {MenuIcon} from '@components/icons/menu';
 import {SearchIcon} from '@components/icons/search';
 import {ThemeSwitch} from '@components/ThemeSwitch';
-import {Grid, Input, styled} from '@nextui-org/react';
-// import {Autocomplete} from '@react-google-maps/api';
+import {Button, Grid, Input, styled, css} from '@nextui-org/react';
+import {Coords} from 'google-map-react';
+import {Dispatch, SetStateAction, useState} from 'react';
+import {Autocomplete} from '@react-google-maps/api';
+import {Box} from '@components/Box';
 
 const StyledHeader = styled('header', {
   position: 'sticky',
@@ -14,24 +17,79 @@ const StyledHeader = styled('header', {
   alignItems: 'center',
   gap: '10px',
   px: '20px',
+  '@xsMax': {
+    px: '10px',
+  },
 });
 
-export const Header = () => {
+const autocompleteCls = css({
+  width: '100%',
+});
+
+type HeaderProps = {
+  isMobile: boolean;
+  hideDetails: Dispatch<SetStateAction<boolean>>;
+  setCoordinates: Dispatch<SetStateAction<Coords>>;
+};
+
+export const Header = ({
+  isMobile,
+  hideDetails,
+  setCoordinates,
+}: HeaderProps) => {
+  const [autocomplete, setAutocomplete] =
+    useState<google.maps.places.Autocomplete | null>(null);
+
+  const onLoad = (autoC: google.maps.places.Autocomplete) =>
+    setAutocomplete(autoC);
+
+  const onPlaceChanged = () => {
+    const lat = autocomplete?.getPlace().geometry?.location?.lat();
+    const lng = autocomplete?.getPlace().geometry?.location?.lng();
+    if (lat && lng) {
+      setCoordinates({lat, lng});
+    }
+  };
+
   return (
     <StyledHeader>
+      {isMobile && (
+        <Button
+          auto
+          icon={<MenuIcon />}
+          light
+          ripple
+          onClick={() => hideDetails((state) => !state)}
+          css={{padding: '$1'}}
+        />
+      )}
       <Grid.Container alignItems="center" justify="center" css={{h: '100%'}}>
-        <Flex gap="3" css={{width: 'min(600px,100%)'}}>
-          <Input
-            placeholder="Search..."
-            fullWidth
-            size="lg"
-            bordered
-            color="primary"
-            contentRight={<SearchIcon />}
-          />
-          {/* <Autocomplete> */}
-          {/* </Autocomplete> */}
-        </Flex>
+        <Box css={{width: 'min(600px,100%)', position: 'relative'}}>
+          <Autocomplete
+            className={autocompleteCls()}
+            onLoad={onLoad}
+            onPlaceChanged={onPlaceChanged}
+          >
+            <Input
+              placeholder="Search..."
+              fullWidth
+              size="lg"
+              bordered
+              color="secondary"
+            />
+          </Autocomplete>
+          <Box
+            css={{
+              position: 'absolute',
+              top: '10px',
+              right: 10,
+              background: 'Field',
+              paddingLeft: '10px',
+            }}
+          >
+            <SearchIcon />
+          </Box>
+        </Box>
       </Grid.Container>
       <ThemeSwitch />
     </StyledHeader>
