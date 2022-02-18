@@ -5,6 +5,7 @@ import {Container, Spacer, styled, Text} from '@nextui-org/react';
 import {useSelect} from 'downshift';
 import {MenuItem} from './MenuItem';
 import {darkTheme} from 'styles/next-theme';
+import {motion} from 'framer-motion';
 
 type Item = {
   value: string;
@@ -14,14 +15,13 @@ type Item = {
 type SelectProps = {
   items: Item[];
   label: string;
-  // selectedItem: string;
   handleSelectedItemChange: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const ItemsContainer = styled('ul', {
+const ItemsContainer = styled(motion.ul, {
   all: 'none',
   boxShadow: '$md',
-  borderRadius: '$xs',
+  borderRadius: '$md',
   overflow: 'hidden',
   outline: 'none',
   width: '100%',
@@ -30,9 +30,12 @@ const ItemsContainer = styled('ul', {
   top: 70,
   left: -20,
   zIndex: '$4',
+  [`.${darkTheme} &`]: {
+    backgroundColor: '$gray900',
+  },
 });
 
-const Button = styled('button', {
+const Button = styled(motion.button, {
   border: 'none',
   borderRadius: '$md',
   padding: '$0 $6',
@@ -58,8 +61,8 @@ export const Select = (props: SelectProps) => {
   const {
     isOpen,
     getLabelProps,
-    selectedItem,
     getToggleButtonProps,
+    selectedItem,
     getMenuProps,
     highlightedIndex,
     getItemProps,
@@ -67,7 +70,7 @@ export const Select = (props: SelectProps) => {
     items,
     itemToString,
     onSelectedItemChange: (e) =>
-      handleSelectedItemChange(e.selectedItem?.value ?? items[0].value),
+      handleSelectedItemChange(e.selectedItem!.value),
   });
 
   return (
@@ -90,7 +93,8 @@ export const Select = (props: SelectProps) => {
       </Button>
       <ItemsContainer
         {...getMenuProps()}
-        css={{border: isOpen ? '1px solid $border' : ''}}
+        animate={{}}
+        css={{border: isOpen ? '2px solid $border' : ''}}
       >
         {isOpen &&
           items.map((item, index) => (
