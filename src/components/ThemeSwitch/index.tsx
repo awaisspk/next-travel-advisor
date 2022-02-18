@@ -14,7 +14,7 @@ export const ThemeSwitch = () => {
     <Box>
       <Switch
         size={isMobile ? 'md' : 'xl'}
-        color="primary"
+        color="secondary"
         bordered
         checked={isDark}
         onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
