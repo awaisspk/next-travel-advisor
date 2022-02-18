@@ -28,18 +28,26 @@ const Home: NextPage = () => {
         <Box
           css={{
             background: 'Field',
+            height: 'calc(100vh - 70px)',
             '@smMax': {
               width: 'min(400px, 100% - 50px)',
               position: 'absolute',
-              h: 'calc(100% - 70px)',
               top: '70px',
-              left: isHideDetails ? '-400px' : '0',
+              left: hideDetails ? '-400px' : '0',
               zIndex: '$4',
               transition: '500ms all',
+              overflowY: 'scroll',
             },
           }}
         >
-          <List />
+          <List
+            places={data}
+            childClicked={childClicked}
+            setType={setType}
+            setRating={setRating}
+            isLoading={isFetching}
+            isError={isError}
+          />
         </Box>
         <Box>
           <Map />
