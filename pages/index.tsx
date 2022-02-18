@@ -28,7 +28,7 @@ const Home: NextPage = () => {
     [type, bounds?.ne.lat, bounds?.ne.lng],
     () => getPlaceDetails({ne: bounds!.ne, sw: bounds!.sw, type}),
     {
-      enabled: bounds !== null,
+      enabled: false,
       retry: true,
       refetchOnWindowFocus: false,
       refetchOnReconnect: true,
