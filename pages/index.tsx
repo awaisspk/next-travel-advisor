@@ -28,7 +28,7 @@ const Home: NextPage = () => {
     [type, bounds?.ne.lat, bounds?.ne.lng],
     () => getPlaceDetails({ne: bounds!.ne, sw: bounds!.sw, type}),
     {
-      enabled: false,
+      enabled: bounds !== null,
       retry: true,
       refetchOnWindowFocus: false,
       refetchOnReconnect: true,
@@ -69,7 +69,7 @@ const Home: NextPage = () => {
             background: 'Field',
             height: 'calc(100vh - 70px)',
             '@smMax': {
-              width: 'min(400px, 100% - 50px)',
+              width: 'min(400px, 100%)',
               position: 'absolute',
               top: '70px',
               left: hideDetails ? '-400px' : '0',

@@ -6,7 +6,13 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import {ReactQueryDevtools} from 'react-query/devtools';
 import {darkTheme, globalStyles, lightTheme} from 'styles/next-theme';
 
-const queryClient = new QueryClient({});
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 6,
+    },
+  },
+});
 function MyApp({Component, pageProps}: AppProps) {
   globalStyles();
   return (
