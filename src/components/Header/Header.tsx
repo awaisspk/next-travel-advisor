@@ -95,7 +95,6 @@ export const Header = ({
               position: 'absolute',
               top: '10px',
               right: 10,
-              background: 'Field',
               paddingLeft: '10px',
             }}
           >
