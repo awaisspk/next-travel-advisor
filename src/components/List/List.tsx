@@ -38,12 +38,11 @@ export const List = ({
   const [placeRef, setPlaceRef] = useState([]);
 
   useEffect(() => {
-    const refs = Array(places?.length)
-      .fill(1)
-      .map((_, i) => placeRef[i] || createRef());
-    setPlaceRef(refs);
-    console.log('loopppppp....');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setPlaceRef((state) => {
+      return Array(places?.length)
+        .fill(1)
+        .map((_, i) => state[i] || createRef());
+    });
   }, [places]);
 
   return (
